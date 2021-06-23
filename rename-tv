@@ -1,0 +1,29 @@
+#!/bin/bash
+DIRECTORY=$(cd `dirname $0` && pwd)
+cd $DIRECTORY
+
+for item in TV/*/*/*
+do
+	if [[ "$item" == *[sS][0-9][0-9][eE][0-9][0-9]* ]]; then
+		extOfFile="${item##*.}"
+		nameOfDir=$(dirname "$item")
+		nameOfShow=$(dirname "$item" | cut -d "/" -f 2)
+		episode=$(echo "$item" | grep -oE '[sS][0-9][0-9][eE][0-9][0-9]')
+		#mv "$item" "$nameOfDir/$nameOfShow $episode.$extOfFile"
+		echo "Old Name:"
+		echo "$item"
+	#	echo "Directory:"
+	#	echo "$nameOfDir"
+	#	echo "Name Of Show:"
+	#	echo $nameOfShow
+	#	echo "Episode:"
+	#	echo "$episode"
+	#	echo "extOfFile:"
+	#	echo "$extOfFile"
+		echo "New Name:"
+		echo "$nameOfDir/$nameOfShow $episode.$extOfFile"
+		echo
+	fi
+done
+exit 0
+
