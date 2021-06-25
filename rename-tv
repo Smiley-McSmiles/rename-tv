@@ -1,18 +1,24 @@
 #!/bin/bash
 DIRECTORY=$(cd `dirname $0` && pwd)
 cd $DIRECTORY
-
-echo "Please enter the directory to correct"
-echo "For example:/jfin/TV/Breaking Bad/Season 2/*"
-read directory_to_correct
-directory_to_correct=$(echo $directory_to_correct | sed -r 's/ /*/g')
-
 clear
-name2=$(echo $directory_to_correct | cut -d "/" -f 2)
-name3=$(echo $directory_to_correct | cut -d "/" -f 3)
-name4=$(echo $directory_to_correct | cut -d "/" -f 4)
-name5=$(echo $directory_to_correct | cut -d "/" -f 5)
-name6=$(echo $directory_to_correct | cut -d "/" -f 6)
+echo "Please enter the directory to correct"
+echo "For example:"
+echo "/jfin/TV/*/*/* <- For every Episode(May Crash Be Careful!)"
+echo "OR:"
+echo "/jfin/TV/Breaking Bad/*/* <- For Every Episode in a show"
+echo "OR:"
+echo "/jfin/TV/Breaking Bad/Season 2/* <- For Every Episode in a season of a show"
+echo
+read directory_to_correct2
+directory_to_correct=$(echo $directory_to_correct2 | sed -r 's/ /*/g')
+clear
+nameOfTestFile=$(ls -1 $directory_to_correct | head -1)
+name2=$(echo $nameOfTestFile | cut -d "/" -f 2)
+name3=$(echo $nameOfTestFile | cut -d "/" -f 3)
+name4=$(echo $nameOfTestFile | cut -d "/" -f 4)
+name5=$(echo $nameOfTestFile | cut -d "/" -f 5)
+name6=$(echo $nameOfTestFile | cut -d "/" -f 6)
 echo "2:$name2"
 echo "3:$name3"
 echo "4:$name4"
@@ -24,7 +30,7 @@ echo "NAMES ARE IN THE SAME LOCATION IN THE DIRECTORY"
 echo
 echo "Please enter the number that corresponds with the show's name above"
 read dir_number
-nameOfShow=$(dirname "$directory_to_correct" | cut -d "/" -f $dir_number)
+nameOfShow=$(dirname "$directory_to_correct2" | cut -d "/" -f $dir_number)
 echo "You chose $nameOfShow"
 
 for item in $directory_to_correct
