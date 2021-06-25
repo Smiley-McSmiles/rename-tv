@@ -2,15 +2,41 @@
 DIRECTORY=$(cd `dirname $0` && pwd)
 cd $DIRECTORY
 
-for item in TV/*/*/*
+echo "Please enter the directory to correct"
+echo "For example:/jfin/TV/Breaking Bad/Season 2/*"
+read directory_to_correct
+directory_to_correct=$(echo $directory_to_correct | sed -r 's/ /*/g')
+
+clear
+name2=$(echo $directory_to_correct | cut -d "/" -f 2)
+name3=$(echo $directory_to_correct | cut -d "/" -f 3)
+name4=$(echo $directory_to_correct | cut -d "/" -f 4)
+name5=$(echo $directory_to_correct | cut -d "/" -f 5)
+name6=$(echo $directory_to_correct | cut -d "/" -f 6)
+echo "2:$name2"
+echo "3:$name3"
+echo "4:$name4"
+echo "5:$name5"
+echo "6:$name6"
+echo
+echo "BE ADVISED, IF YOU'RE RE-NAMING MULTIPLE SHOWS, MAKE SURE ALL THE SHOW DIRECTORY"
+echo "NAMES ARE IN THE SAME LOCATION IN THE DIRECTORY"
+echo
+echo "Please enter the number that corresponds with the shows name above"
+read dir_number
+nameOfShow=$(dirname "$directory_to_correct" | cut -d "/" -f $dir_number)
+echo "You chose $nameOfShow"
+
+for item in $directory_to_correct
 do
+echo $item
 	if [[ "$item" == *[sS][0-9][0-9][eE][0-9][0-9]* ]]; then
 		extOfFile="${item##*.}"
 		nameOfDir=$(dirname "$item")
-		nameOfShow=$(dirname "$item" | cut -d "/" -f 2)
+		nameOfShow=$(dirname "$item" | cut -d "/" -f $dir_number)
 		episode=$(echo "$item" | grep -oE '[sS][0-9][0-9][eE][0-9][0-9]')
-		#mv "$item" "$nameOfDir/$nameOfShow $episode.$extOfFile"
-		echo "Old Name:"
+		mv "$item" "$nameOfDir/$nameOfShow $episode.$extOfFile"
+		echo "item:"
 		echo "$item"
 	#	echo "Directory:"
 	#	echo "$nameOfDir"
@@ -26,4 +52,3 @@ do
 	fi
 done
 exit 0
-
