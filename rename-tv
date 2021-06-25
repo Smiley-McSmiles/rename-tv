@@ -22,7 +22,7 @@ echo
 echo "BE ADVISED, IF YOU'RE RE-NAMING MULTIPLE SHOWS, MAKE SURE ALL THE SHOW DIRECTORY"
 echo "NAMES ARE IN THE SAME LOCATION IN THE DIRECTORY"
 echo
-echo "Please enter the number that corresponds with the shows name above"
+echo "Please enter the number that corresponds with the show's name above"
 read dir_number
 nameOfShow=$(dirname "$directory_to_correct" | cut -d "/" -f $dir_number)
 echo "You chose $nameOfShow"
